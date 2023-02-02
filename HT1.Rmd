@@ -265,13 +265,69 @@ print(proportion_by_country)
 
 ```
 
+### ¿Cuáles películas han rodado en más países?
+
+```{r}
+
+# lee el archivo CSV
+movies_data <- read.csv("movies.csv")
+
+# Contar el número de países que han visitado cada película
+count_by_movie <- table(movies_data$productionCountriesAmount)
+
+# Ordenar las películas por número de países visitados
+sorted_movies_data <- movies_data[order(movies_data$productionCountriesAmount, decreasing = TRUE),]
+
+# Selecciona solo las películas con el número más alto de países visitados
+top_movies <- head(sorted_movies_data, n=10)
+
+# Impresión del resultado
+print(top_movies$title)
 
 
+```
 
 
+### ¿Cuáles películas tienen la mayor cantidad de actores?
+
+```{r}
+
+# lee el archivo CSV
+movies_data <- read.csv("movies.csv")
+
+# Calcular la cantidad de actores por película
+movies_data$actor_count <- sapply(movies_data$actors, function(x) length(unlist(strsplit(x, split = ","))))
+
+# Ordenar las películas por la cantidad de actores
+sorted_movies_data <- movies_data[order(movies_data$actorsAmount, decreasing = TRUE),]
+
+# Selecciona solo las películas con la mayor cantidad de actores
+top_movies <- head(sorted_movies_data, n=10)
+
+# Impresión del resultado
+print(top_movies$title)
+
+```
 
 
+### ¿Cuáles películas son las más largas?
 
+```{r}
+
+# lee el archivo CSV
+movies_data <- read.csv("movies.csv")
+
+# Ordenar las películas por duración
+sorted_movies_data <- movies_data[order(movies_data$runtime, decreasing = TRUE),]
+
+# Selecciona solo las películas con la duración más larga
+top_movies <- head(sorted_movies_data, n=10)
+
+# Impresión del resultado
+print(top_movies$title)
+
+
+```
 
 
 
