@@ -1,0 +1,279 @@
+---
+title: "HDT"
+author: "Javier Valle"
+date: "2023-01-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Inciso 1:  Análisis exploratorio de los datos.
+
+
+```{r}
+movies <- read.csv("movies.csv")
+summary(movies)
+
+```
+
+## Inciso 3: Investigue si las variables cuantitativas siguen una distribución normal y haga una tabla de frecuencias de las variables cualitativas. Explique todos los resultados.
+
+
+```{r}
+movies <- read.csv("movies.csv")
+
+es_cuantitativo <- str(movies)
+
+print(es_cuantitativo)
+
+
+# Haciendo tabla de frecuencias.
+
+# Presupuestos.
+tabla1 <- table(movies$budget)
+print(tabla1)
+
+# Ganancias.
+tabla2 <- table(movies$revenue)
+print(tabla2)
+
+# Tiempo de video.
+tabla3 <- table(movies$runtime)
+print(tabla3)
+
+# Popularidad.
+tabla4 <- table(movies$popularity)
+print(tabla4)
+
+# Promedio de votos.
+tabla5 <- table(movies$voteAvg)
+print(tabla5)
+
+# Conteo de votos.
+tabla6 <- table(movies$voteCount)
+print(tabla6)
+
+# Conteo de géneros.
+tabla7 <- table(movies$genresAmount)
+print(tabla7)
+
+# Conteo de producciones.
+tabla8 <- table(movies$productionCoAmount)
+print(tabla8)
+
+# Conteo de producciones en países.
+tabla9 <- table(movies$productionCountriesAmount)
+print(tabla9)
+
+# Conteo de producciones en países.
+tabla10 <- table(movies$actorsAmount)
+print(tabla10)
+```
+
+
+
+### ¿Cuáles son las 10 películas que contaron con más presupuesto?
+
+```{r}
+movies <- read.csv("movies.csv")
+
+datos_ordenados <- movies[order(movies$budget), ]
+
+print(head(datos_ordenados, n = 10))
+
+```
+
+### ¿Cuál película tuvo más votos?
+
+```{r}
+movies <- read.csv("movies.csv")
+
+datos_ordenados <- movies[order(movies$voteCount, decreasing = TRUE), ]
+
+print(datos_ordenados)
+```
+
+### ¿Cuántas películas se hicieron en cada año?¿En qué año se hicieron más películas? Haga un gráfico de barras.
+```{r}
+movies <- read.csv("movies.csv")
+
+# Agrupando las películas por año.
+pelis_ano <- table(movies$releaseDate)
+
+print(pelis_ano)
+
+# Agrupando las películas por año y contando su frecuencia.
+pelis_por_ano <- table(movies$releaseDate)
+
+# Encontrando el año con el máximo número de películas.
+ano_mas_peliculas <- names(pelis_por_ano)[which.max(pelis_por_ano)]
+
+# Haciendo gráfica de barras.
+barplot(pelis_por_ano, main = paste("Año con más películas: ", ano_mas_peliculas))
+```
+
+
+### ¿Las películas de qué genero principal obtuvieron mayores ganancias?
+
+```{r}
+
+# Leyendo el csv.
+movies <- read.csv("movies.csv")
+
+sum_by_genre <- aggregate(movies$revenue, by=list(movies$genres), sum)
+
+genre_with_max_earnings <- sum_by_genre[which.max(sum_by_genre$x), ]
+
+genre_with_max_earnings
+```
+
+### ¿Es posible que la cantidad de hombres y mujeres en el reparto influya en la popularidad y los ingresos de las películas?
+```{r}
+
+# Castwomenamount, castmenamount.
+
+# Leyendo el csv.
+movies <- read.csv("movies.csv")
+
+# Viendo las ganancias para las películas en donde ganan más con más hombres.
+datos_ordenados <- movies[order(movies$revenue, movies$castMenAmount, decreasing = TRUE), ]
+
+print(datos_ordenados)
+
+# Viendo las ganancias para las películas en donde ganan más con más mujeres.
+datos_ordenados1 <- movies[order(movies$revenue, movies$castWomenAmount, decreasing = TRUE), ]
+
+print(datos_ordenados1)
+```
+
+
+### ¿Cómo se correlacionan los presupuestos con los ingresos? ¿Los altos presupuestos significan altos ingresos? Haga los gráficos que necesite, histograma, diagrama de dispersión
+```{r}
+
+# Leyendo el csv.
+movies <- read.csv("movies.csv")
+
+# Verificando la correlación entre los datos.
+cor(movies$revenue, movies$budget)
+
+# Graficando la relación entre los ingresos y los presupuestos. Diagrama de dispersión.
+plot(movies$revenue, movies$budget)
+
+```
+
+### ¿En qué meses se han visto los lanzamientos con mejores ingresos?¿cuantas películas, en promedio, se han lanzado por mes?
+```{r}
+# lee el archivo CSV
+movies_data <- read.csv("movies.csv")
+
+# Agrupa los ingresos por mes.
+grouped_by_month <- aggregate(movies_data$revenue, by=list(month=movies_data$releaseDate), FUN=sum)
+
+# Encuentra el mes con la suma de ingresos más alta.
+best_month <- grouped_by_month[which.max(grouped_by_month$x), ]
+
+
+print(best_month)
+
+# Viendo cuantas películas se sacan en promedio por mes.
+
+# Agrupa el número de películas lanzadas por mes
+grouped <- aggregate(movies_data$revenue, by=list(month=movies_data$releaseDate), FUN=length)
+
+# Cálculo del promedio de películas por mes
+mean_movies_per_month <- mean(grouped_by_month$x)
+
+# Impresión del resultado
+print(paste("El promedio de películas por mes es", mean_movies_per_month))
+
+```
+
+### ¿A qué género principal pertenecen las películas más largas?
+```{r}
+
+datos <- read.csv("movies.csv")
+
+da <- datos[order(-datos$runtime), ]
+
+top_n <- da[1:1000, ]
+
+generos <- unique(top_n$genres)
+
+print(generos)
+
+```
+
+### ¿Quiénes eran los actores de las películas con más ingresos?
+```{r}
+
+# leyendo el csv.
+movies_data <- read.csv("movies.csv")
+
+# Ordenar las películas por ingresos
+sorted_movies_data <- movies_data[order(movies_data$revenue, decreasing = TRUE),]
+
+# Selecciona solo las películas con más ingresos
+top_movies <- head(sorted_movies_data, n=10)
+
+actores <- top_movies[,c("title", "actors")]
+
+# Impresión del resultado
+print(actores)
+
+```
+
+### ¿Qué compañías participaron en las películas?
+```{r}
+
+# leyendo el csv.
+movies_data <- read.csv("movies.csv")
+
+# Agrupa las películas por compañía
+grouped_by_company <- table(movies_data$productionCompany)
+
+# Cálculo de la proporción de películas por compañía
+proportion_by_company <- prop.table(grouped_by_company)
+
+# Impresión del resultado
+print(proportion_by_company)
+
+```
+
+### ¿De qué país pertenecen las compañías de las películas más famosas?
+```{r}
+
+# lee el archivo CSV
+movies_data <- read.csv("movies.csv")
+
+# Ordenar las películas por popularidad
+sorted_movies_data <- movies_data[order(movies_data$voteCount, decreasing = TRUE),]
+
+# Selecciona solo las películas más populares
+top_movies <- head(sorted_movies_data, n=10)
+
+# Agrupa las películas por país
+grouped_by_country <- table(top_movies$productionCompanyCountry)
+
+# Cálculo de la proporción de películas por país
+proportion_by_country <- prop.table(grouped_by_country)
+
+# Impresión del resultado
+print(proportion_by_country)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
