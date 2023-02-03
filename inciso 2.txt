@@ -27,3 +27,17 @@ Variables con sus tipos:
 - actorsAmount: Cantidad de personas que actúan en la película = cuantitativa discreta
 - castWomenAmount: Cantidad de actrices en el elenco de la película = cuantitativa discreta
 - castMenAmount: Cantidad de actores en el elenco de la película = cuantitativa discreta
+
+
+
+
+
+4.10. (8 puntos) 
+4.11. (8  puntos)  ¿Cómo  se  correlacionan  los  presupuestos  con  los  ingresos?  ¿Los  altos 
+presupuestos significan altos ingresos? Haga los gráficos que necesite, histograma, 
+diagrama de dispersión 
+4.12. (7 puntos) ¿Se asocian ciertos meses de lanzamiento con mejores ingresos? 
+4.13. (8 puntos) ¿En qué meses se han visto los lanzamientos con mejores 
+ingresos?¿cuantas películas, en promedio, se han lanzado por mes? 
+4.14. (7 puntos) ¿Cómo se correlacionan las calificaciones con el éxito comercial? 
+4.15. (5 puntos) ¿A qué género principal pertenecen las películas más largas? 
