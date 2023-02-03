@@ -94,21 +94,24 @@ df = read_csv("movies.csv",header=0,index_col=0)
 
 
 # inciso 4.12
-print("¿Se asocian ciertos meses de lanzamiento con mejores ingresos?")
-df2 = pd.DataFrame()
-df2['revenue'] = df['revenue']
-df2['months'] = pd.to_datetime(df['releaseDate']).dt.month
-grouped = df2.groupby('months').sum()
-grouped2 = df2.groupby('months').mean()
-grouped3 = df2.groupby('months').count()
-# print(df2)
-print("\nsuma de ingresos por mes:")
-print(grouped)
-print("\nmedia de ingresos por mes:")
-print(grouped2)
-print("\npeliculas totales por mes:")
-print(grouped3)
+# print("¿Se asocian ciertos meses de lanzamiento con mejores ingresos?")
+# df2 = pd.DataFrame()
+# df2['revenue'] = df['revenue']
+# df2['months'] = pd.to_datetime(df['releaseDate']).dt.month
+# grouped = df2.groupby('months').sum()
+# grouped2 = df2.groupby('months').mean()
+# grouped3 = df2.groupby('months').count()
+# # print(df2)
+# print("\nsuma de ingresos por mes:")
+# print(grouped)
+# print("\nmedia de ingresos por mes:")
+# print(grouped2)
+# print("\npeliculas totales por mes:")
+# print(grouped3)
 
 
-
-
+# inciso 4.14
+print("¿La cantidad de actores influye en los ingresos de las películas?\n¿se han hecho películas con más actores en los últimos años?")
+corr_actorsAmont_and_revenue = df['actorsAmount'].corr(df['revenue'])
+print(corr_actorsAmont_and_revenue)
+print(df['revenue'].apply(pd.to_datetime))
