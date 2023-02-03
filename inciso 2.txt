@@ -1,0 +1,29 @@
+Variables con sus tipos: 
+
+- Id: Id de la película = cualitativa ordinal
+- popularity: Índice de popularidad de la película calculado semanalmente = cuantitativa continua
+- budget: El presupuesto para la película = cuantitativa continua
+- revenue: El ingreso de la película = cuantitativa continua
+- original_title: El título original de la película, en su idioma original = cualitativa nominal 
+- originalLanguage: Idioma original en que se encuentra la película = cualitativa nominal
+- title: El título de la película traducido al inglés = cualitativa nominal
+- homePage: La página de inicio de la película = cualitativa nominal
+- video: Si tiene videos promocionales o no = cualitativa nominal
+- director: Director de la película = cualitativa nominal
+- runtime: La duración de la película = cuantitativa continua
+- genres: El género de la película = cualitativa nominal
+- genresAmount: Cantidad de géneros que representan la película = cuantitativa discreta
+- productionCompany: Las compañías productoras de la película = cualitativa nominal
+- productionCoAmount: Cantidad de compañías productoras que participaron en la película = cuantitativa discreta
+- productionCompanyCountry: Países de las compañías productoras de la película = cualitativa nominal
+- productionCountry: Países en los que se llevó a cabo la producción de la película = cualitativa nominal
+- productionCountriesAmount: Cantidad de países en los que se rodó la película = cuantitativa discreta
+- releaseDate: Fecha de lanzamiento de la película = cualitativa ordinal
+- voteCount: El número de votos en la plataforma para la película = cuantitativa discreta
+- voteAvg: El promedio de los votos en la plataforma para la película = cuantitativa continua
+- actors: Actores que participan en la película (Elenco) = cualitativa nominal
+- actorsPopularity: Índice de popularidad del elenco de la película = cuantitativa continua
+- actorsCharacter: Personaje que interpreta cada actor en la película = cualitativa nominal
+- actorsAmount: Cantidad de personas que actúan en la película = cuantitativa discreta
+- castWomenAmount: Cantidad de actrices en el elenco de la película = cuantitativa discreta
+- castMenAmount: Cantidad de actores en el elenco de la película = cuantitativa discreta
